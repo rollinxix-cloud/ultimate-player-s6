@@ -3,89 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Player S6 | Bracket</title>
+    <title>Ultimate Player S6 | Tournament Hub</title>
     <style>
-        :root { --bg: #0b0e14; --card: #161a23; --blue: #0070f3; --gold: #d4af37; --line: #2d3343; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: white; margin: 0; padding: 40px; }
+        :root { --bg: #0b0e14; --card: #161a23; --blue: #0070f3; --gold: #d4af37; --line: #2d3343; --text-muted: #666; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: white; margin: 0; padding: 40px; display: flex; flex-direction: column; align-items: center; }
         
         header { text-align: center; margin-bottom: 50px; }
         h1 { color: var(--gold); text-transform: uppercase; letter-spacing: 4px; margin: 0; }
-        p { color: #888; margin-top: 5px; }
+        p { color: #888; margin-top: 5px; font-weight: bold; }
 
-        /* The Bracket Wrapper */
-        .bracket { display: flex; align-items: center; justify-content: center; gap: 40px; min-width: 900px; }
+        /* Bracket Wrapper */
+        .bracket { display: flex; align-items: center; justify-content: center; gap: 50px; min-width: 950px; margin-top: 20px; }
 
-        /* Columns */
-        .column { display: flex; flex-direction: column; justify-content: space-around; height: 500px; }
+        /* Column Setup */
+        .column { display: flex; flex-direction: column; justify-content: space-around; height: 550px; }
+        .column-title { color: var(--gold); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-bottom: 10px; opacity: 0.8; }
 
-        /* Match Styles */
-        .match { background: var(--card); border: 1px solid var(--line); width: 220px; border-radius: 6px; position: relative; padding: 5px 0; }
-        .match-active { border-color: var(--blue); box-shadow: 0 0 15px rgba(0, 112, 243, 0.3); }
+        /* Match Box Styles */
+        .match { background: var(--card); border: 1px solid var(--line); width: 230px; border-radius: 6px; position: relative; padding: 5px 0; transition: 0.3s; }
+        .match:hover { border-color: #444; }
 
-        .team { display: flex; justify-content: space-between; padding: 8px 12px; font-size: 0.9rem; font-weight: 500; }
+        .team { display: flex; justify-content: space-between; padding: 10px 15px; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.5px; }
         .team:first-child { border-bottom: 1px solid var(--line); }
-        .score { color: var(--blue); font-weight: bold; }
-        .leg-detail { font-size: 0.65rem; color: #666; display: block; text-align: right; padding: 2px 12px; }
+        .score { color: var(--blue); font-weight: bold; font-family: 'Courier New', monospace; }
+        
+        .leg-detail { font-size: 0.65rem; color: var(--text-muted); display: block; text-align: right; padding: 2px 15px; font-style: italic; }
 
-        /* Connector Lines */
-        .match::after { content: ""; position: absolute; right: -40px; top: 50%; width: 40px; height: 2px; background: var(--line); }
-        .column-final .match::after { display: none; } /* No line after final */
+        /* Connector Lines (The "Tree" Logic) */
+        .match::after { content: ""; position: absolute; right: -50px; top: 50%; width: 50px; height: 2px; background: var(--line); }
+        .column-final .match::after { display: none; }
 
-        /* Special CSS to make the "bracket tree" curves */
-        .column-qf .match:nth-child(odd)::after { height: 60px; border-top: 2px solid var(--line); border-right: 2px solid var(--line); border-radius: 0 10px 0 0; top: 50%; }
-        .column-qf .match:nth-child(even)::after { height: 60px; border-bottom: 2px solid var(--line); border-right: 2px solid var(--line); border-radius: 0 0 10px 0; top: -50%; }
+        .column-qf .match:nth-child(odd)::after { height: 75px; border-top: 2px solid var(--line); border-right: 2px solid var(--line); border-radius: 0 10px 0 0; top: 50%; }
+        .column-qf .match:nth-child(even)::after { height: 75px; border-bottom: 2px solid var(--line); border-right: 2px solid var(--line); border-radius: 0 0 10px 0; top: -50%; }
+        
+        .column-sf .match:nth-child(odd)::after { height: 145px; border-top: 2px solid var(--line); border-right: 2px solid var(--line); border-radius: 0 10px 0 0; top: 50%; }
+        .column-sf .match:nth-child(even)::after { height: 145px; border-bottom: 2px solid var(--line); border-right: 2px solid var(--line); border-radius: 0 0 10px 0; top: -50%; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Ultimate Player Season 6</h1>
-    <p>Knockout Stage • eFootball Tournament</p>
+    <h1>ULTIMATE PLAYER SEASON 6</h1>
+    <p>KNOCKOUT STAGE • EFOOTBALL TOURNAMENT</p>
 </header>
 
 <div class="bracket">
     
     <div class="column column-qf">
+        <div class="column-title">Quarter-Finals (2 Legs)</div>
         <div class="match">
-            <div class="team"><span>Paris SG</span> <span class="score">4</span></div>
-            <div class="team"><span>Liverpool</span> <span class="score">2</span></div>
-            <span class="leg-detail">L1: 2-1 | L2: 2-1</span>
+            <div class="team"><span>Player A</span> <span class="score">-</span></div>
+            <div class="team"><span>Player B</span> <span class="score">-</span></div>
+            <span class="leg-detail">Waiting for kickoff...</span>
         </div>
         <div class="match">
-            <div class="team"><span>Real Madrid</span> <span class="score">0</span></div>
-            <div class="team"><span>Man City</span> <span class="score">0</span></div>
-            <span class="leg-detail">L1: 0-0 | L2: 0-0</span>
+            <div class="team"><span>Player C</span> <span class="score">-</span></div>
+            <div class="team"><span>Player D</span> <span class="score">-</span></div>
+            <span class="leg-detail">Waiting for kickoff...</span>
         </div>
         <div class="match">
-            <div class="team"><span>Barcelona</span> <span class="score">0</span></div>
-            <div class="team"><span>Arsenal</span> <span class="score">0</span></div>
-            <span class="leg-detail">L1: 0-0 | L2: 0-0</span>
+            <div class="team"><span>Player E</span> <span class="score">-</span></div>
+            <div class="team"><span>Player F</span> <span class="score">-</span></div>
+            <span class="leg-detail">Waiting for kickoff...</span>
         </div>
         <div class="match">
-            <div class="team"><span>Bayern</span> <span class="score">0</span></div>
-            <div class="team"><span>Chelsea</span> <span class="score">0</span></div>
-            <span class="leg-detail">L1: 0-0 | L2: 0-0</span>
+            <div class="team"><span>Player G</span> <span class="score">-</span></div>
+            <div class="team"><span>Player H</span> <span class="score">-</span></div>
+            <span class="leg-detail">Waiting for kickoff...</span>
         </div>
     </div>
 
-    <div class="column">
-        <div class="match match-active">
-            <div class="team"><span>Paris SG</span> <span class="score">-</span></div>
+    <div class="column column-sf">
+        <div class="column-title">Semi-Finals (2 Legs)</div>
+        <div class="match">
             <div class="team"><span>TBD</span> <span class="score">-</span></div>
-            <span class="leg-detail">Leg 1 Waiting...</span>
+            <div class="team"><span>TBD</span> <span class="score">-</span></div>
+            <span class="leg-detail">Awaiting QF results</span>
         </div>
         <div class="match">
             <div class="team"><span>TBD</span> <span class="score">-</span></div>
             <div class="team"><span>TBD</span> <span class="score">-</span></div>
-            <span class="leg-detail">Awaiting Results</span>
+            <span class="leg-detail">Awaiting QF results</span>
         </div>
     </div>
 
     <div class="column column-final">
+        <div class="column-title">Grand Final (1 Leg)</div>
         <div class="match" style="border-color: var(--gold); border-width: 2px;">
             <div class="team" style="color: var(--gold);"><span>TBD</span> <span class="score">-</span></div>
             <div class="team"><span>TBD</span> <span class="score">-</span></div>
-            <span class="leg-detail">Final (One Leg)</span>
+            <span class="leg-detail">Championship Match</span>
         </div>
     </div>
 
