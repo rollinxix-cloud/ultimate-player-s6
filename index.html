@@ -17,10 +17,11 @@
             --ef-border: rgba(0, 229, 255, 0.2);
             --line-opacity: 0.15;
             --glow: radial-gradient(circle at 50% -20%, rgba(0, 229, 255, 0.15), transparent 70%);
+            --fb-blue: #1877F2;
         }
 
         body.light-mode {
-            /* LIGHT MODE - Day Match (Vibrant & Saturated) */
+            /* LIGHT MODE - Day Match */
             --bg-base: #f0f4f8;
             --bg-accent: #ffffff;
             --text-main: #0a1128;
@@ -35,7 +36,6 @@
         body {
             font-family: 'Rajdhani', sans-serif;
             background-color: var(--bg-base);
-            /* This combines the stadium glow and the eFootball tech-grid into one background */
             background-image: 
                 var(--glow),
                 linear-gradient(var(--ef-border) 1px, transparent 1px),
@@ -52,8 +52,8 @@
             transition: all 0.4s ease;
         }
 
-        /* Top Bar & Theme Toggle */
-        .top-bar { width: 100%; max-width: 1000px; display: flex; justify-content: flex-end; padding: 20px; }
+        /* Top Bar */
+        .top-bar { width: 100%; max-width: 1000px; display: flex; justify-content: flex-end; padding: 20px; box-sizing: border-box;}
         .theme-btn {
             background: var(--ef-card);
             border: 1px solid var(--ef-blue);
@@ -74,10 +74,11 @@
             letter-spacing: 5px;
             text-shadow: 0 0 20px rgba(248, 255, 0, 0.3);
             margin: 0;
+            text-align: center;
         }
 
         /* Bracket Styling */
-        .viewport-container { width: 100%; overflow-x: auto; padding-bottom: 50px; display: flex; justify-content: center; }
+        .viewport-container { width: 100%; overflow-x: auto; padding-bottom: 80px; display: flex; justify-content: center; }
         .bracket { display: flex; align-items: center; gap: 60px; width: max-content; padding: 40px; }
         
         .column { display: flex; flex-direction: column; justify-content: space-around; height: 650px; }
@@ -112,13 +113,66 @@
         .score { color: var(--ef-blue); font-size: 1.3rem; }
         .leg-info { font-size: 0.7rem; padding: 8px; text-align: center; background: rgba(0,0,0,0.2); display: block; }
 
-        /* Connector Lines (eFootball Style) */
-        .match::after { content: ""; position: absolute; right: -60px; top: 50%; width: 60px; height: 2px; background: var(--ef-blue); opacity: 0.4; }
-        .column-final .match::after { display: none; }
+        /* Floating Community Section */
+        .community-corner {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .join-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--ef-blue);
+            letter-spacing: 1px;
+            background: var(--ef-card);
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid var(--ef-border);
+        }
+
+        .fb-btn {
+            background: var(--fb-blue);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 20px rgba(24, 119, 242, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: pulse-glow 2s infinite;
+        }
+
+        .fb-btn:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 8px 25px rgba(24, 119, 242, 0.6);
+        }
+
+        .fb-icon {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(24, 119, 242, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(24, 119, 242, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(24, 119, 242, 0); }
+        }
 
         @media screen and (max-width: 768px) {
             .bracket { transform: scale(0.8); transform-origin: top left; }
             header h1 { font-size: 1.8rem; }
+            .fb-btn { padding: 10px 18px; font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -129,7 +183,7 @@
 </div>
 
 <header>
-    <h1>ULTIMATE PLAYER S11</h1>
+    <h1>ULTIMATE PLAYER SEASON 11</h1>
 </header>
 
 <div class="viewport-container">
@@ -171,6 +225,14 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="community-corner">
+    <span class="join-label">Official Group</span>
+    <a href="https://facebook.com/groups/pesmatches" target="_blank" class="fb-btn">
+        <svg class="fb-icon" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        PES MATCHES
+    </a>
 </div>
 
 <script>
