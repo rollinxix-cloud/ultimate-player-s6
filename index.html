@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Player S6 | Jon Bonz</title>
+    <style>
+        :root { --gold: #d4af37; --bg: #0b0f1a; --card: #161b2a; --win: #22c55e; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: white; margin: 0; padding: 20px; }
+        .container { max-width: 1000px; margin: auto; }
+        header { text-align: center; border-bottom: 2px solid var(--gold); padding: 20px; margin-bottom: 30px; }
+        h1 { color: var(--gold); text-transform: uppercase; letter-spacing: 2px; }
+
+        /* Tournament Bracket Layout */
+        .bracket { display: flex; justify-content: space-between; gap: 20px; overflow-x: auto; padding-bottom: 20px; }
+        .round { flex: 1; min-width: 220px; }
+        .round-title { text-align: center; color: var(--gold); font-size: 0.9rem; margin-bottom: 15px; text-transform: uppercase; }
+        
+        .matchup { background: var(--card); border: 1px solid #2d3343; border-radius: 10px; margin-bottom: 20px; padding: 12px; position: relative; }
+        .matchup.active { border-color: var(--gold); box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
+        
+        .slot { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #232936; }
+        .slot:last-child { border: none; }
+        .score-box { color: var(--gold); font-weight: bold; }
+        .agg-total { font-size: 0.7rem; color: #888; display: block; text-align: right; margin-top: 5px; }
+
+        /* Elimination Table */
+        .elimination-section { margin-top: 50px; background: var(--card); border-radius: 15px; padding: 20px; border: 1px solid #2d3343; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th { text-align: left; color: var(--gold); border-bottom: 2px solid #232936; padding: 10px; }
+        td { padding: 12px; border-bottom: 1px solid #232936; font-size: 0.9rem; }
+        .status-out { color: #ff4d4d; font-weight: bold; }
+        .status-in { color: var(--win); font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Ultimate Player Season 6</h1>
+        <p>Knockout Stage • 8 Elite Teams</p>
+    </header>
+
+    <div class="bracket">
+        <div class="round">
+            <div class="round-title">Quarter-Finals (2 Legs)</div>
+            <div class="matchup">
+                <div class="slot"><span>Team 1</span> <span class="score-box">0</span></div>
+                <div class="slot"><span>Team 2</span> <span class="score-box">0</span></div>
+                <span class="agg-total">L1: 0-0 | L2: 0-0</span>
+            </div>
+            <div class="matchup">
+                <div class="slot"><span>Team 3</span> <span class="score-box">0</span></div>
+                <div class="slot"><span>Team 4</span> <span class="score-box">0</span></div>
+                <span class="agg-total">L1: 0-0 | L2: 0-0</span>
+            </div>
+            </div>
+
+        <div class="round">
+            <div class="round-title">Semi-Finals (2 Legs)</div>
+            <div class="matchup active">
+                <div class="slot"><span>TBD</span> <span class="score-box">-</span></div>
+                <div class="slot"><span>TBD</span> <span class="score-box">-</span></div>
+            </div>
+        </div>
+
+        <div class="round">
+            <div class="round-title">Grand Final (1 Leg)</div>
+            <div class="matchup" style="border: 2px solid var(--gold);">
+                <div class="slot"><span>Champion 🏆</span> <span class="score-box">-</span></div>
+                <div class="slot"><span>Finalist</span> <span class="score-box">-</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="elimination-section">
+        <h3>Live Elimination Table</h3>
+        <table>
+            <tr><th>Player/Team</th><th>Last Match</th><th>Status</th></tr>
+            <tr><td>Team 1</td><td>Quarter Final</td><td><span class="status-in">ACTIVE</span></td></tr>
+            <tr><td>Team 2</td><td>Quarter Final</td><td><span class="status-in">ACTIVE</span></td></tr>
+            <tr><td>Team 3</td><td>Quarter Final</td><td><span class="status-out">ELIMINATED</span></td></tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
