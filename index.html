@@ -3,314 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Player S11 | Jon Bonz eSports</title>
+    <title>Ultimate Player S11 | eFootball Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        /* Define both themes using CSS Variables */
         :root {
-            /* DARK MODE (Night Match - Default) */
-            --bg-color: #02060c;
-            --bg-gradient: linear-gradient(135deg, #02060c 0%, #110821 100%);
+            /* DARK MODE - Night Match */
+            --bg-base: #02060c;
+            --bg-accent: #110821;
             --text-main: #ffffff;
             --ef-blue: #00e5ff;
             --ef-yellow: #f8ff00;
             --ef-card: rgba(15, 25, 45, 0.9);
-            --ef-border: #1e2d4a;
-            --leg-info-bg: rgba(0,0,0,0.4);
-            --leg-info-text: #7b8fae;
-            --round-bg: rgba(0, 229, 255, 0.05);
-            --shadow: rgba(0,0,0,0.5);
-            --header-glow: rgba(248, 255, 0, 0.4);
+            --ef-border: rgba(0, 229, 255, 0.2);
+            --line-opacity: 0.15;
+            --glow: radial-gradient(circle at 50% -20%, rgba(0, 229, 255, 0.15), transparent 70%);
         }
 
         body.light-mode {
-            /* LIGHT MODE (Day Match - Vibrant & Saturated) */
-            --bg-color: #f0f4f8;
-            --bg-gradient: linear-gradient(135deg, #e8f0fe 0%, #ffffff 100%);
+            /* LIGHT MODE - Day Match (Vibrant & Saturated) */
+            --bg-base: #f0f4f8;
+            --bg-accent: #ffffff;
             --text-main: #0a1128;
-            --ef-blue: #0056b3;     /* Deeper, vibrant blue for daylight readability */
-            --ef-yellow: #d97706;   /* Rich gold/amber instead of neon */
+            --ef-blue: #0056b3;
+            --ef-yellow: #d97706;
             --ef-card: rgba(255, 255, 255, 0.95);
-            --ef-border: #cbd5e1;
-            --leg-info-bg: #e2e8f0;
-            --leg-info-text: #475569;
-            --round-bg: rgba(0, 86, 179, 0.1);
-            --shadow: rgba(0,0,0,0.1);
-            --header-glow: rgba(217, 119, 6, 0.2);
+            --ef-border: rgba(0, 86, 179, 0.2);
+            --line-opacity: 0.1;
+            --glow: radial-gradient(circle at 50% -20%, rgba(0, 86, 179, 0.1), transparent 70%);
         }
 
         body {
             font-family: 'Rajdhani', sans-serif;
-            background: var(--bg-gradient);
-            background-color: var(--bg-color);
+            background-color: var(--bg-base);
+            /* This combines the stadium glow and the eFootball tech-grid into one background */
+            background-image: 
+                var(--glow),
+                linear-gradient(var(--ef-border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--ef-border) 1px, transparent 1px),
+                linear-gradient(135deg, var(--bg-base) 0%, var(--bg-accent) 100%);
+            background-size: 100% 100%, 60px 60px, 60px 60px, 100% 100%;
             background-attachment: fixed;
             color: var(--text-main);
             margin: 0;
-            padding: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-            transition: background 0.4s ease, color 0.4s ease;
+            transition: all 0.4s ease;
         }
 
-        /* eFootball Background Elements (Adapts to Light/Dark) */
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                linear-gradient(var(--ef-border) 1px, transparent 1px),
-                linear-gradient(90deg, var(--ef-border) 1px, transparent 1px);
-            background-size: 100px 100px;
-            opacity: 0.15;
-            z-index: -1;
-            transition: opacity 0.4s ease;
-        }
-
-        /* Top Bar with Toggle */
-        .top-bar {
-            width: 100%;
-            max-width: 1000px;
-            display: flex;
-            justify-content: flex-end;
-            padding: 10px 20px;
-            box-sizing: border-box;
-        }
-
+        /* Top Bar & Theme Toggle */
+        .top-bar { width: 100%; max-width: 1000px; display: flex; justify-content: flex-end; padding: 20px; }
         .theme-btn {
             background: var(--ef-card);
-            border: 1px solid var(--ef-border);
+            border: 1px solid var(--ef-blue);
             color: var(--text-main);
             font-family: 'Rajdhani', sans-serif;
             font-weight: 700;
-            font-size: 0.9rem;
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 10px 20px;
+            border-radius: 4px;
             cursor: pointer;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 10px var(--shadow);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            box-shadow: 0 0 15px var(--ef-border);
         }
 
-        .theme-btn:hover {
-            border-color: var(--ef-blue);
-            transform: translateY(-2px);
-        }
-
-        header {
-            text-align: center;
-            margin: 10px 0 30px 0;
-        }
-
-        h1 {
+        header h1 {
             color: var(--ef-yellow);
-            text-transform: uppercase;
-            font-size: 2.2rem;
             font-style: italic;
-            letter-spacing: 4px;
+            font-size: 2.5rem;
+            letter-spacing: 5px;
+            text-shadow: 0 0 20px rgba(248, 255, 0, 0.3);
             margin: 0;
-            text-shadow: 0 0 20px var(--header-glow);
-            transition: color 0.4s ease, text-shadow 0.4s ease;
         }
 
-        /* Bracket Setup */
-        .viewport-container {
-            width: 100%;
-            overflow-x: auto;
-            padding: 20px 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .bracket-scaler {
-            transform-origin: top center;
-            padding: 20px;
-        }
-
-        .bracket {
-            display: flex;
-            align-items: center;
-            gap: 60px;
-            width: max-content;
-        }
-
-        .column {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            height: 600px;
-            min-width: 220px;
-        }
-
+        /* Bracket Styling */
+        .viewport-container { width: 100%; overflow-x: auto; padding-bottom: 50px; display: flex; justify-content: center; }
+        .bracket { display: flex; align-items: center; gap: 60px; width: max-content; padding: 40px; }
+        
+        .column { display: flex; flex-direction: column; justify-content: space-around; height: 650px; }
         .round-name {
             color: var(--ef-blue);
-            font-size: 0.8rem;
-            text-transform: uppercase;
             text-align: center;
-            margin-bottom: 15px;
-            background: var(--round-bg);
-            padding: 6px;
-            border-left: 3px solid var(--ef-blue);
-            letter-spacing: 2px;
+            background: rgba(0, 229, 255, 0.1);
+            padding: 8px;
+            border-left: 4px solid var(--ef-blue);
             font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
         }
 
         .match {
             background: var(--ef-card);
             border: 1px solid var(--ef-border);
-            width: 220px;
-            border-radius: 4px;
+            width: 240px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             position: relative;
-            box-shadow: 0 10px 30px var(--shadow);
-            transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
         }
 
         .team {
             display: flex;
             justify-content: space-between;
-            padding: 14px 18px;
-            font-size: 1rem;
+            padding: 15px;
+            font-size: 1.1rem;
             font-weight: 700;
-            letter-spacing: 1px;
             border-bottom: 1px solid var(--ef-border);
-            text-transform: uppercase;
         }
 
-        .score { color: var(--ef-blue); font-size: 1.2rem; font-weight: 700;}
-        
-        .leg-info {
-            font-size: 0.7rem;
-            color: var(--leg-info-text);
-            display: block;
-            text-align: right;
-            padding: 6px 18px;
-            background: var(--leg-info-bg);
-            text-transform: uppercase;
-            font-weight: 700;
-        }
+        .score { color: var(--ef-blue); font-size: 1.3rem; }
+        .leg-info { font-size: 0.7rem; padding: 8px; text-align: center; background: rgba(0,0,0,0.2); display: block; }
 
-        /* Connector Lines */
-        .match::after {
-            content: ""; position: absolute; right: -60px; top: 50%; width: 60px; height: 2px; background: var(--ef-border);
-            transition: background 0.4s;
-        }
+        /* Connector Lines (eFootball Style) */
+        .match::after { content: ""; position: absolute; right: -60px; top: 50%; width: 60px; height: 2px; background: var(--ef-blue); opacity: 0.4; }
         .column-final .match::after { display: none; }
 
-        .column-qf .match:nth-child(odd)::after {
-            height: 75px; border-top: 2px solid var(--ef-border); border-right: 2px solid var(--ef-border); border-radius: 0 15px 0 0; top: 50%;
-        }
-        .column-qf .match:nth-child(even)::after {
-            height: 75px; border-bottom: 2px solid var(--ef-border); border-right: 2px solid var(--ef-border); border-radius: 0 0 15px 0; top: -50%;
-        }
-        .column-sf .match:nth-child(odd)::after {
-            height: 150px; border-top: 2px solid var(--ef-border); border-right: 2px solid var(--ef-border); border-radius: 0 15px 0 0; top: 50%;
-        }
-        .column-sf .match:nth-child(even)::after {
-            height: 150px; border-bottom: 2px solid var(--ef-border); border-right: 2px solid var(--ef-border); border-radius: 0 0 15px 0; top: -50%;
-        }
-
         @media screen and (max-width: 768px) {
-            .bracket-scaler { transform: scale(0.75); }
-            .viewport-container { justify-content: flex-start; }
-            h1 { font-size: 1.6rem; }
+            .bracket { transform: scale(0.8); transform-origin: top left; }
+            header h1 { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
 
 <div class="top-bar">
-    <button id="themeToggle" class="theme-btn">☀️ Day Mode</button>
+    <button id="themeToggle" class="theme-btn">☀️ Day Match</button>
 </div>
 
 <header>
-    <h1>ULTIMATE PLAYER SEASON 11</h1>
+    <h1>ULTIMATE PLAYER S11</h1>
 </header>
 
 <div class="viewport-container">
-    <div class="bracket-scaler">
-        <div class="bracket">
-            
-            <div class="column column-qf">
-                <div class="round-name">Quarter-Finals</div>
-                <div class="match">
-                    <div class="team"><span>Binaya Shrestha</span> <span class="score">-</span></div>
-                    <div class="team"><span>Manees Paudel</span> <span class="score">-</span></div>
-                    <span class="leg-info">Waiting for Kickoff</span>
-                </div>
-                <div class="match">
-                    <div class="team"><span>Samir Sunar</span> <span class="score">-</span></div>
-                    <div class="team"><span>Siv Sunar</span> <span class="score">-</span></div>
-                    <span class="leg-info">Waiting for Kickoff</span>
-                </div>
-                <div class="match">
-                    <div class="team"><span>Basanta Tamang</span> <span class="score">-</span></div>
-                    <div class="team"><span>Player F</span> <span class="score">-</span></div>
-                    <span class="leg-info">Waiting for Kickoff</span>
-                </div>
-                <div class="match">
-                    <div class="team"><span>Player G</span> <span class="score">-</span></div>
-                    <div class="team"><span>Player H</span> <span class="score">-</span></div>
-                    <span class="leg-info">Waiting for Kickoff</span>
-                </div>
+    <div class="bracket">
+        <div class="column">
+            <div class="round-name">Quarter-Finals</div>
+            <div class="match">
+                <div class="team"><span>Binaya Shrestha</span> <span class="score">-</span></div>
+                <div class="team"><span>Manees Paudel</span> <span class="score">-</span></div>
+                <span class="leg-info">Waiting for Kickoff</span>
             </div>
-
-            <div class="column column-sf">
-                <div class="round-name">Semi-Finals</div>
-                <div class="match">
-                    <div class="team"><span>TBD</span> <span class="score">-</span></div>
-                    <div class="team"><span>TBD</span> <span class="score">-</span></div>
-                    <span class="leg-info">QF Results Pending</span>
-                </div>
-                <div class="match">
-                    <div class="team"><span>TBD</span> <span class="score">-</span></div>
-                    <div class="team"><span>TBD</span> <span class="score">-</span></div>
-                    <span class="leg-info">QF Results Pending</span>
-                </div>
+            <div class="match">
+                <div class="team"><span>Samir Sunar</span> <span class="score">-</span></div>
+                <div class="team"><span>Siv Sunar</span> <span class="score">-</span></div>
+                <span class="leg-info">Waiting for Kickoff</span>
             </div>
-
-            <div class="column column-final">
-                <div class="round-name">Grand Final</div>
-                <div class="match" id="finalMatch" style="border: 2px solid var(--ef-yellow); box-shadow: 0 0 20px var(--header-glow);">
-                    <div class="team" style="color: var(--ef-yellow);"><span>TBD</span> <span class="score">-</span></div>
-                    <div class="team"><span>TBD</span> <span class="score">-</span></div>
-                    <span class="leg-info">Championship Match</span>
-                </div>
+            <div class="match">
+                <div class="team"><span>Basanta Tamang</span> <span class="score">-</span></div>
+                <div class="team"><span>Player F</span> <span class="score">-</span></div>
+                <span class="leg-info">Waiting for Kickoff</span>
             </div>
+        </div>
 
+        <div class="column">
+            <div class="round-name">Semi-Finals</div>
+            <div class="match">
+                <div class="team"><span>TBD</span> <span class="score">-</span></div>
+                <div class="team"><span>TBD</span> <span class="score">-</span></div>
+                <span class="leg-info">Pending Results</span>
+            </div>
+        </div>
+
+        <div class="column column-final">
+            <div class="round-name">Grand Final</div>
+            <div class="match" style="border: 2px solid var(--ef-yellow);">
+                <div class="team" style="color: var(--ef-yellow);"><span>TBD</span> <span class="score">-</span></div>
+                <div class="team"><span>TBD</span> <span class="score">-</span></div>
+                <span class="leg-info">Championship Match</span>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
-    const themeToggleBtn = document.getElementById('themeToggle');
-    const body = document.body;
-
-    // Check if the user previously selected light mode
-    if (localStorage.getItem('esports_theme') === 'light') {
-        body.classList.add('light-mode');
-        themeToggleBtn.innerHTML = '🌙 Night Mode';
-    }
-
-    // Toggle function
-    themeToggleBtn.addEventListener('click', () => {
-        body.classList.toggle('light-mode');
-        
-        if (body.classList.contains('light-mode')) {
-            localStorage.setItem('esports_theme', 'light');
-            themeToggleBtn.innerHTML = '🌙 Night Mode';
-        } else {
-            localStorage.setItem('esports_theme', 'dark');
-            themeToggleBtn.innerHTML = '☀️ Day Mode';
-        }
-    });
+    const btn = document.getElementById('themeToggle');
+    btn.onclick = () => {
+        document.body.classList.toggle('light-mode');
+        btn.innerText = document.body.classList.contains('light-mode') ? '🌙 Night Match' : '☀️ Day Match';
+    };
 </script>
-
 </body>
 </html>
