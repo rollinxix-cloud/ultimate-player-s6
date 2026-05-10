@@ -7,8 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* DARK MODE (Night Match - Default) */
-            --bg-base: #02060c;
+            var(--bg-base): #02060c;
             --bg-accent: #110821;
             --text-main: #ffffff;
             --ef-blue: #00e5ff;
@@ -22,7 +21,6 @@
         }
 
         body.light-mode {
-            /* LIGHT MODE (Day Match - Vibrant) */
             --bg-base: #f0f4f8;
             --bg-accent: #ffffff;
             --text-main: #0a1128;
@@ -57,7 +55,6 @@
             transition: all 0.4s ease;
         }
 
-        /* Top Bar */
         .top-bar {
             width: 100%;
             padding: 15px 30px;
@@ -68,9 +65,9 @@
             background: rgba(0,0,0,0.1);
         }
 
-        /* FIXED LOGO URL */
+        /* NEW FOOLPROOF LOGO STYLING */
         .ef-logo {
-            width: 100px;
+            width: 130px;
             height: auto;
             object-fit: contain;
             filter: drop-shadow(0 0 8px var(--ef-blue));
@@ -97,7 +94,6 @@
             text-align: center;
         }
 
-        /* Bracket Styling */
         .viewport-container { width: 100%; overflow-x: auto; padding-bottom: 80px; display: flex; justify-content: center; }
         .bracket { display: flex; align-items: center; gap: 60px; width: max-content; padding: 20px 40px; }
         
@@ -137,10 +133,8 @@
         .score { color: var(--ef-blue); font-size: 1.2rem; }
         .leg-info { font-size: 0.7rem; padding: 6px; text-align: center; background: var(--leg-info-bg); display: block; text-transform: uppercase;}
 
-        /* Symmetric Lines */
         .match::after { content: ""; position: absolute; top: 50%; width: 60px; height: 2px; background: var(--ef-border); transition: all 0.3s ease;}
         
-        /* Left Bracket Lines */
         .left-bracket .match::after { right: -60px; }
         .left-bracket .round-1 .match:nth-child(odd)::after {
             height: 75px; border-top: 2px solid var(--ef-border); border-right: 2px solid var(--ef-border); border-radius: 0 15px 0 0; top: 50%;
@@ -149,7 +143,6 @@
             height: 75px; border-bottom: 2px solid var(--ef-border); border-right: 2px solid var(--ef-border); border-radius: 0 0 15px 0; top: -50%;
         }
 
-        /* Right Bracket Lines */
         .right-bracket .match::after { left: -60px; }
         .right-bracket .round-1 .match:nth-child(odd)::after {
             height: 75px; border-top: 2px solid var(--ef-border); border-left: 2px solid var(--ef-border); border-radius: 15px 0 0 0; top: 50%;
@@ -158,12 +151,10 @@
             height: 75px; border-bottom: 2px solid var(--ef-border); border-left: 2px solid var(--ef-border); border-radius: 0 0 0 15px; top: -50%;
         }
 
-        /* Final Column */
         .final-column .match::after { display: none; }
         .final-match { border: 2px solid var(--ef-yellow); width: 240px; }
         .final-match .team { color: var(--ef-yellow); font-size: 1.1rem;}
 
-        /* Floating community Section (FIXED) */
         .community-corner {
             position: fixed;
             bottom: 20px;
@@ -209,7 +200,6 @@
 
         .fb-svg { width: 22px; height: 22px; fill: white; }
 
-        /* Modal Player History */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; backdrop-filter: blur(5px);}
         .modal {
             display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -222,7 +212,7 @@
             .bracket { transform: scale(0.8); transform-origin: top left; }
             header h1 { font-size: 1.6rem; }
             .top-bar { padding: 10px 15px; }
-            .ef-logo { width: 80px; }
+            .ef-logo { width: 100px; }
             .community-corner { bottom: 15px; right: 15px; }
             .fb-label { display: none; }
         }
@@ -231,7 +221,7 @@
 <body>
 
 <div class="top-bar">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/EFootball_logo.png" alt="eFootball Hub" class="ef-logo">
+    <img src="https://logodownload.org/wp-content/uploads/2021/08/efootball-logo-0.png" alt="eFootball Hub" class="ef-logo">
     <button id="themeToggle" class="theme-btn">☀️ Day Match</button>
 </div>
 
@@ -309,14 +299,13 @@
 </div>
 
 <div class="community-corner">
-    <span class="fb-label">PES MATCHES</span>
-    <a href="https://facebook.com/groups/pesmatches" target="_blank" class="fb-icon-btn">
+    <span class="fb-label">EDN</span>
+    <a href="https://facebook.com/" target="_blank" class="fb-icon-btn">
         <svg class="fb-svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
     </a>
 </div>
 
 <script>
-    // Theme Toggle Logic
     const btn = document.getElementById('themeToggle');
     const body = document.body;
     
@@ -325,7 +314,6 @@
         btn.innerText = body.classList.contains('light-mode') ? '🌙 Night Match' : '☀️ Day Match';
     };
 
-    // Player History Modal Logic
     function checkHistory(name) {
         document.getElementById('modalName').innerText = name;
         document.getElementById('modalStatus').innerText = "Has not won the tournament yet.";
