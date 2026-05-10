@@ -7,95 +7,86 @@
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
+            /* Night Match - High Contrast */
             --bg-base: #02060c;
             --bg-accent: #0b1120;
             --text-main: #ffffff;
             --ef-blue: #00e5ff;
             --ef-yellow: #f8ff00;
             --ef-card: linear-gradient(145deg, rgba(15, 25, 45, 0.95), rgba(5, 10, 20, 0.95));
-            --ef-border: rgba(0, 229, 255, 0.4);
-            --glow: radial-gradient(circle at 50% -20%, rgba(0, 229, 255, 0.15), transparent 70%);
-            --shadow: rgba(0,0,0,0.6);
-            --score-bg: rgba(0, 0, 0, 0.8);
+            --ef-border: rgba(0, 229, 255, 0.5);
+            --shadow: rgba(0,0,0,0.8);
+            --score-bg: rgba(0, 0, 0, 0.9);
         }
 
+        /* FIXED LIGHT MODE - High Visibility for Fixtures */
         body.light-mode {
-            --bg-base: #e2e8f0;
+            --bg-base: #f0f4f8;
             --bg-accent: #ffffff;
-            --text-main: #0f172a;
-            --ef-blue: #0056b3;
-            --ef-yellow: #d97706;
-            --ef-card: linear-gradient(145deg, #ffffff, #f8fafc);
-            --ef-border: rgba(0, 86, 179, 0.3);
-            --shadow: rgba(0,0,0,0.1);
-            --score-bg: #e2e8f0;
+            --text-main: #1a202c;
+            --ef-blue: #0062cc;
+            --ef-yellow: #c05621;
+            --ef-card: linear-gradient(145deg, #ffffff, #edf2f7);
+            --ef-border: #2d3748; /* Darker borders for fixture visibility */
+            --shadow: rgba(0,0,0,0.15);
+            --score-bg: #cbd5e0;
         }
 
         body {
             font-family: 'Rajdhani', sans-serif;
             background-color: var(--bg-base);
-            background-image: var(--glow), linear-gradient(135deg, var(--bg-base) 0%, var(--bg-accent) 100%);
             color: var(--text-main);
             margin: 0;
             min-height: 100vh;
             overflow-x: hidden;
-            transition: all 0.4s ease;
+            transition: background 0.3s ease;
         }
 
         .top-bar {
             width: 100%;
             padding: 15px 20px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end; /* Moved to end since logo is gone */
             align-items: center;
             box-sizing: border-box;
         }
 
-        .ef-logo {
-            width: 65px;
-            height: 65px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 8px var(--ef-blue));
-            border-radius: 8px;
-        }
-
-        /* Prediction Banner */
         .vote-banner {
             background: rgba(0, 229, 255, 0.1);
             border: 1px solid var(--ef-border);
             margin: 10px 20px;
-            padding: 10px;
+            padding: 12px;
             text-align: center;
             border-radius: 8px;
             font-weight: 700;
             color: var(--ef-yellow);
             text-transform: uppercase;
             font-size: 0.9rem;
-            letter-spacing: 1px;
+            box-shadow: 0 4px 10px var(--shadow);
         }
 
         .theme-btn {
-            background: rgba(0,0,0,0.5);
-            border: 1px solid var(--ef-blue);
+            background: var(--bg-accent);
+            border: 2px solid var(--ef-blue);
             color: var(--ef-blue);
-            padding: 8px 12px;
+            padding: 10px 16px;
             font-weight: 700;
             cursor: pointer;
             text-transform: uppercase;
-            font-size: 0.8rem;
-            border-radius: 4px;
+            border-radius: 6px;
         }
 
         header h1 {
             color: var(--ef-yellow);
             text-align: center;
             font-style: italic;
-            letter-spacing: 2px;
-            font-size: 1.8rem;
-            margin: 10px 0 20px;
+            letter-spacing: 3px;
+            font-size: 2.2rem;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px var(--shadow);
         }
 
-        /* BRACKET */
+        /* BRACKET SYSTEM */
         .viewport-container {
             width: 100%;
             overflow-x: auto;
@@ -115,74 +106,56 @@
             display: flex;
             flex-direction: column;
             justify-content: space-around;
-            height: 550px;
+            height: 600px;
+        }
+
+        .round-label {
+            text-align: center;
+            font-weight: 800;
+            color: var(--ef-blue);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
         }
 
         .match {
             background: var(--ef-card);
-            border: 1px solid var(--ef-border);
-            border-radius: 6px;
-            width: 210px;
+            border: 2px solid var(--ef-border);
+            border-radius: 8px;
+            width: 220px;
             position: relative;
-            box-shadow: 0 8px 20px var(--shadow);
-            overflow: hidden;
+            box-shadow: 0 10px 25px var(--shadow);
+            margin: 15px 0;
         }
         
         .team {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 14px;
+            padding: 12px 15px;
             font-weight: 700;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
         }
 
-        .player-name { cursor: pointer; }
-        .player-name:hover { color: var(--ef-yellow); }
+        .player-name { cursor: pointer; transition: color 0.2s; }
+        .player-name:hover { color: var(--ef-blue); text-decoration: underline; }
 
         .score { 
             color: var(--ef-blue); 
             background: var(--score-bg);
-            padding: 2px 8px;
+            padding: 2px 10px;
             border-radius: 4px;
-            border: 1px solid var(--ef-border);
+            font-family: 'Courier New', monospace;
         }
 
-        /* VOTING UI IN MODAL */
-        .vote-section {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(0,229,255,0.2);
-        }
-
-        .vote-btn {
-            background: var(--ef-blue);
-            color: #000;
-            border: none;
-            padding: 10px 20px;
-            font-weight: 800;
-            text-transform: uppercase;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-            transition: transform 0.2s;
-        }
-
-        .vote-btn.undo {
-            background: #ef4444;
-            color: white;
-            margin-top: 10px;
-        }
-
-        .vote-btn:active { transform: scale(0.95); }
-
-        /* MODAL */
+        /* MODAL & VOTING */
         .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
+            background: rgba(0,0,0,0.9);
             z-index: 2000;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(5px);
         }
         .modal {
             display: none;
@@ -190,33 +163,69 @@
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             background: var(--bg-accent);
-            border: 2px solid var(--ef-blue);
+            border: 3px solid var(--ef-blue);
             padding: 30px;
             text-align: center;
             z-index: 2001;
-            min-width: 280px;
-            border-radius: 8px;
+            width: 300px;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0,229,255,0.3);
         }
-        .modal h2 { color: var(--ef-yellow); margin: 0 0 10px; }
 
-        .fb-float {
-            position: fixed; bottom: 20px; right: 20px;
-            width: 50px; height: 50px; background: #1877F2;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            z-index: 1000;
+        .history-badge {
+            display: inline-block;
+            background: var(--ef-yellow);
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            margin-bottom: 15px;
         }
-        .fb-float svg { width: 25px; fill: white; }
+
+        .vote-count-display {
+            font-size: 1.2rem;
+            margin: 15px 0;
+            color: var(--text-main);
+        }
+
+        .vote-count-display span {
+            color: var(--ef-blue);
+            font-weight: 800;
+        }
+
+        .vote-btn {
+            background: var(--ef-blue);
+            color: #000;
+            border: none;
+            padding: 12px;
+            font-weight: 800;
+            width: 100%;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .vote-btn.undo { background: #e53e3e; color: #fff; }
+
+        .close-btn {
+            margin-top: 20px;
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--ef-border);
+            padding: 5px 15px;
+            cursor: pointer;
+        }
     </style>
 </head>
-<body>
+<body class="night-mode">
 
 <div class="top-bar">
-    <img src="YOUR_SQUARE_LOGO_LINK_HERE.png" alt="eFootball" class="ef-logo">
     <button id="themeToggle" class="theme-btn">☀️ Day Match</button>
 </div>
 
 <div id="userPrediction" class="vote-banner">
-    Pick your Season 11 Winner! Click a player name to vote.
+    Analyze the fixtures and vote for your champion!
 </div>
 
 <header>
@@ -225,42 +234,51 @@
 
 <div class="viewport-container">
     <div class="bracket">
-        <div class="column left-bracket round-1">
+        <div class="column">
+            <div class="round-label">Quarter Finals</div>
             <div class="match">
-                <div class="team"><span class="player-name" onclick="openPlayerInfo('Binaya S.')">Binaya S.</span> <span class="score">-</span></div>
-                <div class="team"><span class="player-name" onclick="openPlayerInfo('Manees P.')">Manees P.</span> <span class="score">-</span></div>
+                <div class="team"><span class="player-name" onclick="showPlayer('Binaya S.')">Binaya S.</span> <span class="score">-</span></div>
+                <div class="team"><span class="player-name" onclick="showPlayer('Manees P.')">Manees P.</span> <span class="score">-</span></div>
             </div>
             <div class="match">
-                <div class="team"><span class="player-name" onclick="openPlayerInfo('Samir S.')">Samir S.</span> <span class="score">-</span></div>
-                <div class="team"><span class="player-name" onclick="openPlayerInfo('Siv S.')">Siv S.</span> <span class="score">-</span></div>
-            </div>
-        </div>
-        <div class="column left-bracket round-2">
-            <div class="match">
-                <div class="team"><span class="player-name">TBD</span> <span class="score">-</span></div>
-                <div class="team"><span class="player-name">TBD</span> <span class="score">-</span></div>
+                <div class="team"><span class="player-name" onclick="showPlayer('Samir S.')">Samir S.</span> <span class="score">-</span></div>
+                <div class="team"><span class="player-name" onclick="showPlayer('Siv S.')">Siv S.</span> <span class="score">-</span></div>
             </div>
         </div>
-        <div class="column final-column">
+
+        <div class="column">
+            <div class="round-label">Semi Finals</div>
             <div class="match">
-                <div class="team"><span class="player-name">TBD</span> <span class="score">-</span></div>
-                <div class="team"><span class="player-name">TBD</span> <span class="score">-</span></div>
+                <div class="team"><span>TBD</span> <span class="score">-</span></div>
+                <div class="team"><span>TBD</span> <span class="score">-</span></div>
             </div>
         </div>
-        <div class="column right-bracket round-2">
-            <div class="match">
-                <div class="team"><span class="player-name">TBD</span> <span class="score">-</span></div>
-                <div class="team"><span class="player-name">TBD</span> <span class="score">-</span></div>
+
+        <div class="column">
+            <div class="round-label" style="color:var(--ef-yellow)">Championship</div>
+            <div class="match" style="border-color: var(--ef-yellow)">
+                <div class="team"><span>TBD</span> <span class="score">-</span></div>
+                <div class="team"><span>TBD</span> <span class="score">-</span></div>
             </div>
         </div>
-        <div class="column right-bracket round-1">
+
+        <div class="column">
+            <div class="round-label">Semi Finals</div>
             <div class="match">
-                <div class="team"><span class="player-name" onclick="openPlayerInfo('Basanta T.')">Basanta T.</span> <span class="score">-</span></div>
-                <div class="team"><span class="player-name" onclick="openPlayerInfo('Manjil C.')">Manjil C.</span> <span class="score">-</span></div>
+                <div class="team"><span>TBD</span> <span class="score">-</span></div>
+                <div class="team"><span>TBD</span> <span class="score">-</span></div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="round-label">Quarter Finals</div>
+            <div class="match">
+                <div class="team"><span class="player-name" onclick="showPlayer('Basanta T.')">Basanta T.</span> <span class="score">-</span></div>
+                <div class="team"><span class="player-name" onclick="showPlayer('Manjil C.')">Manjil C.</span> <span class="score">-</span></div>
             </div>
             <div class="match">
-                <div class="team"><span class="player-name" onclick="openPlayerInfo('Subash T.')">Subash T.</span> <span class="score">-</span></div>
-                <div class="team"><span class="player-name" onclick="openPlayerInfo('Prateek K.')">Prateek K.</span> <span class="score">-</span></div>
+                <div class="team"><span class="player-name" onclick="showPlayer('Subash T.')">Subash T.</span> <span class="score">-</span></div>
+                <div class="team"><span class="player-name" onclick="showPlayer('Prateek K.')">Prateek K.</span> <span class="score">-</span></div>
             </div>
         </div>
     </div>
@@ -268,74 +286,88 @@
 
 <div id="modalOverlay" class="modal-overlay" onclick="closeModal()"></div>
 <div id="playerModal" class="modal">
-    <h2 id="modalName">Player Name</h2>
-    <div id="voteSection" class="vote-section">
-        </div>
-    <br>
-    <button class="close-btn" onclick="closeModal()">Close</button>
+    <div id="playerBadge"></div>
+    <h2 id="modalName" style="margin: 5px 0;">Player Name</h2>
+    
+    <div class="vote-count-display">
+        Total Votes: <span id="totalVoteNum">0</span>
+    </div>
+
+    <div id="voteActionArea"></div>
+    
+    <button class="close-btn" onclick="closeModal()">Back to Bracket</button>
 </div>
 
-<a href="https://facebook.com/groups/pesmatches" target="_blank" class="fb-float">
-    <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-</a>
-
 <script>
-    // Initialize Theme
-    const btn = document.getElementById('themeToggle');
-    btn.onclick = () => {
-        document.body.classList.toggle('light-mode');
-        btn.innerText = document.body.classList.contains('light-mode') ? '🌙 Night Match' : '☀️ Day Match';
+    // 1. DATA CONFIGURATION (Update 'history' and 'votes' here)
+    const playerData = {
+        "Manjil C.":  { history: "🏆 Season 9 Champion", votes: 42 },
+        "Prateek K.": { history: "🏆 Season 10 Champion", votes: 38 },
+        "Basanta T.": { history: "🥈 Season 9 Runner-up", votes: 15 },
+        "Binaya S.":  { history: "New Contender", votes: 24 },
+        "Manees P.":  { history: "Season 10 Semi-Finalist", votes: 9 },
+        "Samir S.":   { history: "Top 8 Finisher", votes: 12 },
+        "Siv S.":     { history: "Elite League Veteran", votes: 7 },
+        "Subash T.":  { history: "Dark Horse", votes: 11 }
     };
 
-    // VOTE LOGIC
-    let currentVotedPlayer = localStorage.getItem('s11_vote') || null;
+    // 2. THEME TOGGLE
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.onclick = () => {
+        document.body.classList.toggle('light-mode');
+        themeBtn.innerText = document.body.classList.contains('light-mode') ? '🌙 Night Match' : '☀️ Day Match';
+    };
 
-    function updateBanner() {
+    // 3. VOTING SYSTEM
+    let myVote = localStorage.getItem('user_choice') || null;
+
+    function updatePredictionBanner() {
         const banner = document.getElementById('userPrediction');
-        if (currentVotedPlayer) {
-            banner.innerHTML = `Your Winner Prediction: <span style="color:white">${currentVotedPlayer}</span> 🏆`;
-        } else {
-            banner.innerHTML = "Pick your Season 11 Winner! Click a player name to vote.";
-        }
+        banner.innerHTML = myVote 
+            ? `My Prediction: <span style="color:white">${myVote}</span> 🏆` 
+            : "Analyze the fixtures and vote for your champion!";
     }
 
-    function openPlayerInfo(name) {
+    function showPlayer(name) {
+        const data = playerData[name] || { history: "Participant", votes: 0 };
         document.getElementById('modalName').innerText = name;
-        const voteSection = document.getElementById('voteSection');
-        voteSection.innerHTML = '';
+        document.getElementById('totalVoteNum').innerText = data.votes;
+        
+        // History Badge
+        const badge = document.getElementById('playerBadge');
+        badge.innerHTML = `<span class="history-badge">${data.history}</span>`;
 
-        if (currentVotedPlayer === name) {
-            // User already voted for THIS player
-            const undoBtn = document.createElement('button');
-            undoBtn.className = 'vote-btn undo';
-            undoBtn.innerText = 'Undo My Vote';
-            undoBtn.onclick = () => removeVote();
-            voteSection.appendChild(undoBtn);
+        // Vote Buttons
+        const actionArea = document.getElementById('voteActionArea');
+        actionArea.innerHTML = '';
+
+        if (myVote === name) {
+            const btn = document.createElement('button');
+            btn.className = 'vote-btn undo';
+            btn.innerText = 'Remove My Vote';
+            btn.onclick = () => handleVote(null);
+            actionArea.appendChild(btn);
         } else {
-            // User has not voted for this player
-            const voteBtn = document.createElement('button');
-            voteBtn.className = 'vote-btn';
-            voteBtn.innerText = currentVotedPlayer ? `Change Vote to ${name}` : `Vote for ${name} to Win`;
-            voteBtn.onclick = () => castVote(name);
-            voteSection.appendChild(voteBtn);
+            const btn = document.createElement('button');
+            btn.className = 'vote-btn';
+            btn.innerText = myVote ? `Change Vote to ${name}` : `Vote for ${name}`;
+            btn.onclick = () => handleVote(name);
+            actionArea.appendChild(btn);
         }
 
         document.getElementById('playerModal').style.display = 'block';
         document.getElementById('modalOverlay').style.display = 'block';
     }
 
-    function castVote(name) {
-        localStorage.setItem('s11_vote', name);
-        currentVotedPlayer = name;
-        updateBanner();
-        closeModal();
-        alert(`Prediction Locked: ${name} for the Title!`);
-    }
-
-    function removeVote() {
-        localStorage.removeItem('s11_vote');
-        currentVotedPlayer = null;
-        updateBanner();
+    function handleVote(name) {
+        if (name) {
+            localStorage.setItem('user_choice', name);
+            myVote = name;
+        } else {
+            localStorage.removeItem('user_choice');
+            myVote = null;
+        }
+        updatePredictionBanner();
         closeModal();
     }
 
@@ -344,8 +376,7 @@
         document.getElementById('modalOverlay').style.display = 'none';
     }
 
-    // Load initial banner state
-    updateBanner();
+    updatePredictionBanner();
 </script>
 
 </body>
