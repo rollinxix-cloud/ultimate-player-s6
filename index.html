@@ -223,9 +223,9 @@
         <div class="column">
             <div class="round-name">Left QF</div>
             <div class="match">
-                <div class="team"><span class="player-name" onclick="checkHistory('Binaya S.')">Binaya S.</span> <span class="score">-</span></div>
-                <div class="team"><span class="player-name" onclick="checkHistory('Manees P.')">Manees P.</span> <span class="score">-</span></div>
-                <span class="leg-info">Waiting Kickoff</span>
+                <div class="team"><span class="player-name" onclick="checkHistory('Binaya S.')">Binaya S.</span> <span class="score">2</span></div>
+                <div class="team"><span class="player-name" onclick="checkHistory('Manees P.')">Manees P.</span> <span class="score">5</span></div>
+                <span class="leg-info">1st Leg Played</span>
             </div>
             <div class="match">
                 <div class="team"><span class="player-name" onclick="checkHistory('Samir S.')">Samir S.</span> <span class="score">-</span></div>
@@ -298,15 +298,7 @@
 
     function checkHistory(name) {
         document.getElementById('modalName').innerText = name;
-        
-        // Default text for all players who haven't won yet
         let statusText = "Has not won the tournament yet.";
-
-        // If you need to add future champions back in, use this format:
-        // if (name === "Future Champion Name") {
-        //     statusText = "🏆 1x Ultimate Player<br>🥈 1x Runner-up";
-        // }
-
         document.getElementById('modalStatus').innerHTML = statusText;
         document.getElementById('playerModal').style.display = 'block';
         document.getElementById('modalOverlay').style.display = 'block';
