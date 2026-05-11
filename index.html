@@ -265,12 +265,12 @@
             <div class="round-name">Right QF</div>
             <div class="match">
                 <div class="team"><span class="player-name" onclick="checkHistory('Basanta T.')">Basanta T.</span> <span class="score">-</span></div>
-                <div class="team"><span class="player-name" onclick="checkHistory('Manjil C.')">Manjil C.</span> <span class="score">-</span></div>
+                <div class="team"><span class="player-name" onclick="checkHistory('Smile X.')">Smile X.</span> <span class="score">-</span></div>
                 <span class="leg-info">Waiting Kickoff</span>
             </div>
             <div class="match">
                 <div class="team"><span class="player-name" onclick="checkHistory('Subash T.')">Subash T.</span> <span class="score">-</span></div>
-                <div class="team"><span class="player-name" onclick="checkHistory('Prateek K.')">Prateek K.</span> <span class="score">-</span></div>
+                <div class="team"><span class="player-name" onclick="checkHistory('Suraj T.')">Suraj T.</span> <span class="score">-</span></div>
                 <span class="leg-info">Waiting Kickoff</span>
             </div>
         </div>
@@ -285,7 +285,7 @@
     <button class="close-btn" onclick="closeModal()">CLOSE</button>
 </div>
 
-<a href="https://facebook.com/groups/pesmatches" target="_blank" class="fb-float">
+<a href="https://facebook.com/groups/pesmatches" target="_blank" class="fb-float" title="Join EDN Community">
     <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
 </a>
 
@@ -298,14 +298,14 @@
 
     function checkHistory(name) {
         document.getElementById('modalName').innerText = name;
-        let statusText = "";
+        
+        // Default text for all players who haven't won yet
+        let statusText = "Has not won the tournament yet.";
 
-        // Applying specific logic for champions
-        if (name === "Manjil C." || name === "Prateek K.") {
-            statusText = "🏆 1x Ultimate Player<br>🥈 1x Runner-up";
-        } else {
-            statusText = "Has not won the tournament yet.";
-        }
+        // If you need to add future champions back in, use this format:
+        // if (name === "Future Champion Name") {
+        //     statusText = "🏆 1x Ultimate Player<br>🥈 1x Runner-up";
+        // }
 
         document.getElementById('modalStatus').innerHTML = statusText;
         document.getElementById('playerModal').style.display = 'block';
