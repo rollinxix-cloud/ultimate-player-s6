@@ -224,8 +224,8 @@
             <div class="round-name">Left QF</div>
             <div class="match">
                 <div class="team"><span class="player-name" onclick="checkHistory('Binaya S.')">Binaya S.</span> <span class="score">2</span></div>
-                <div class="team"><span class="player-name" onclick="checkHistory('Manees P.')">Manees P.</span> <span class="score">5</span></div>
-                <span class="leg-info">1st Leg Played</span>
+                <div class="team"><span class="player-name" onclick="checkHistory('Manees P.')">Manees P.</span> <span class="score">7</span></div>
+                <span class="leg-info">Agg: 2-7 | (2-5), (0-2)</span>
             </div>
             <div class="match">
                 <div class="team"><span class="player-name" onclick="checkHistory('Samir S.')">Samir S.</span> <span class="score">3</span></div>
@@ -237,9 +237,9 @@
         <div class="column">
             <div class="round-name">Semi-Final 1</div>
             <div class="match">
-                <div class="team"><span>TBD</span> <span class="score">-</span></div>
+                <div class="team"><span class="player-name" onclick="checkHistory('Manees P.')">Manees P.</span> <span class="score">-</span></div>
                 <div class="team"><span class="player-name" onclick="checkHistory('Siv S.')">Siv S.</span> <span class="score">-</span></div>
-                <span class="leg-info">Waiting for QF1 Winner</span>
+                <span class="leg-info" style="color: #ff0055; animation: blink 1s infinite;">● MATCH LIVE</span>
             </div>
         </div>
 
@@ -247,7 +247,7 @@
             <div class="round-name" style="color: var(--ef-yellow); border-color: var(--ef-yellow);">Grand Final</div>
             <div class="match final-match">
                 <div class="team"><span>TBD</span> <span class="score">-</span></div>
-                <div class="team"><span>TBD</span> <span class="score">-</span></div>
+                <div class="team"><span class="player-name" onclick="checkHistory('Subash T.')">Subash T.</span> <span class="score">-</span></div>
                 <span class="leg-info" style="color: var(--ef-yellow);">Championship Match</span>
             </div>
         </div>
@@ -255,9 +255,9 @@
         <div class="column">
             <div class="round-name">Semi-Final 2</div>
             <div class="match">
-                <div class="team"><span class="player-name" onclick="checkHistory('Smile X.')">Smile X.</span> <span class="score">-</span></div>
-                <div class="team"><span class="player-name" onclick="checkHistory('Subash T.')">Subash T.</span> <span class="score">-</span></div>
-                <span class="leg-info">Waiting Kickoff</span>
+                <div class="team"><span class="player-name" onclick="checkHistory('Smile X.')">Smile X.</span> <span class="score">2</span></div>
+                <div class="team"><span class="player-name" onclick="checkHistory('Subash T.')">Subash T.</span> <span class="score">9</span></div>
+                <span class="leg-info">Agg: 2-9 | (2-6), (0-3)</span>
             </div>
         </div>
 
@@ -309,6 +309,14 @@
         document.getElementById('modalOverlay').style.display = 'none';
     }
 </script>
+
+<style>
+    @keyframes blink {
+        0% { opacity: 1; }
+        50% { opacity: 0.3; }
+        100% { opacity: 1; }
+    }
+</style>
 
 </body>
 </html>
