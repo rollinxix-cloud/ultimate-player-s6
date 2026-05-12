@@ -7,12 +7,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Night Match (Dark Mode) */
             --bg-base: #02060c;
             --bg-accent: #0b1120;
             --text-main: #ffffff;
             --ef-blue: #00e5ff;
             --ef-yellow: #f8ff00;
+            --ef-gold: #ffcc00;
             --ef-card: #0f172a;
             --ef-border: rgba(0, 229, 255, 0.4);
             --glow: radial-gradient(circle at 50% -20%, rgba(0, 229, 255, 0.15), transparent 70%);
@@ -21,12 +21,12 @@
         }
 
         body.light-mode {
-            /* Day Match (High Contrast for Mobile) */
             --bg-base: #ffffff;
             --bg-accent: #f1f5f9;
             --text-main: #0f172a;
             --ef-blue: #0070f3;
             --ef-yellow: #b45309;
+            --ef-gold: #d97706;
             --ef-card: #ffffff;
             --ef-border: #94a3b8;
             --glow: none;
@@ -137,6 +137,25 @@
             cursor: pointer;
         }
 
+        /* CHAMPION SPECIAL EFFECT */
+        .winner-manees {
+            color: var(--ef-gold) !important;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
+            font-weight: 800;
+        }
+
+        .champion-card {
+            border: 2px solid var(--ef-gold) !important;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.4) !important;
+            animation: pulse-gold 2s infinite;
+        }
+
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 0 10px rgba(255, 204, 0, 0.4); }
+            50% { box-shadow: 0 0 25px rgba(255, 204, 0, 0.7); }
+            100% { box-shadow: 0 0 10px rgba(255, 204, 0, 0.4); }
+        }
+
         .score { 
             color: var(--ef-blue); 
             background: var(--score-bg);
@@ -157,7 +176,8 @@
 
         .final-match { 
             border: 2px solid var(--ef-yellow); 
-            transform: scale(1.1);
+            transform: scale(1.15);
+            z-index: 10;
         }
 
         /* MODAL STYLES */
@@ -220,11 +240,12 @@
 <div class="viewport-container">
     <div class="bracket">
         
+        <!-- Left Column -->
         <div class="column">
             <div class="round-name">Left QF</div>
             <div class="match">
                 <div class="team"><span class="player-name" onclick="checkHistory('Binaya S.')">Binaya S.</span> <span class="score">2</span></div>
-                <div class="team"><span class="player-name" onclick="checkHistory('Manees P.')">Manees P.</span> <span class="score">7</span></div>
+                <div class="team"><span class="player-name winner-manees" onclick="checkHistory('Manees P.')">Manees P. 🏆</span> <span class="score">7</span></div>
                 <span class="leg-info">Agg: 2-7 | (2-5), (0-2)</span>
             </div>
             <div class="match">
@@ -234,24 +255,27 @@
             </div>
         </div>
 
+        <!-- Semi Final 1 -->
         <div class="column">
             <div class="round-name">Semi-Final 1</div>
             <div class="match">
-                <div class="team"><span class="player-name" onclick="checkHistory('Manees P.')">Manees P.</span> <span class="score">7</span></div>
+                <div class="team"><span class="player-name winner-manees" onclick="checkHistory('Manees P.')">Manees P. 🏆</span> <span class="score">7</span></div>
                 <div class="team"><span class="player-name" onclick="checkHistory('Siv S.')">Siv S.</span> <span class="score">6</span></div>
                 <span class="leg-info">Agg: 7-6 | (2-5), (5-1)</span>
             </div>
         </div>
 
+        <!-- Grand Final -->
         <div class="column">
-            <div class="round-name" style="color: var(--ef-yellow); border-color: var(--ef-yellow);">Grand Final</div>
-            <div class="match final-match">
-                <div class="team"><span class="player-name" onclick="checkHistory('Manees P.')">Manees P.</span> <span class="score">-</span></div>
-                <div class="team"><span class="player-name" onclick="checkHistory('Subash T.')">Subash T.</span> <span class="score">-</span></div>
-                <span class="leg-info" style="color: var(--ef-yellow);">Championship Match</span>
+            <div class="round-name" style="color: var(--ef-gold); border-color: var(--ef-gold);">SEASON 11 CHAMPION</div>
+            <div class="match final-match champion-card">
+                <div class="team"><span class="player-name winner-manees" onclick="checkHistory('Manees P.')">MANEES P. 🏆</span> <span class="score" style="background: var(--ef-gold); color: #000;">6</span></div>
+                <div class="team"><span class="player-name" onclick="checkHistory('Subash T.')">SUBASH T.</span> <span class="score">2</span></div>
+                <span class="leg-info" style="color: var(--ef-gold);">SEASON 11 FINAL RESULT</span>
             </div>
         </div>
 
+        <!-- Semi Final 2 -->
         <div class="column">
             <div class="round-name">Semi-Final 2</div>
             <div class="match">
@@ -261,6 +285,7 @@
             </div>
         </div>
 
+        <!-- Right Column -->
         <div class="column">
             <div class="round-name">Right QF</div>
             <div class="match">
@@ -299,6 +324,13 @@
     function checkHistory(name) {
         document.getElementById('modalName').innerText = name;
         let statusText = "Has not won the tournament yet.";
+        
+        // Champion Status Update
+        if (name === "Manees P." || name === "Manees P. 🏆" || name === "MANEES P. 🏆") {
+            document.getElementById('modalName').innerText = "Manees P.";
+            statusText = "<span style='color: #ffcc00;'>🏆 ULTIMATE PLAYER SEASON 11 CHAMPION</span><br>Successfully claimed the title with a dominant 6-2 Final victory.";
+        }
+        
         document.getElementById('modalStatus').innerHTML = statusText;
         document.getElementById('playerModal').style.display = 'block';
         document.getElementById('modalOverlay').style.display = 'block';
